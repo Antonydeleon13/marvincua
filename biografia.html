@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biografía | Marvin Cua Ministerios</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --card-bg: #161616;
+            --accent-color: #ffffff;
+            --brand-red: #ff2222;
+            --muted-color: #999999;
+            --border-color: #262626;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background-color: #000000;
+            color: var(--muted-color);
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            width: 100%;
+        }
+
+        /* Header Principal */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(11, 11, 11, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        .logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brand-red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--muted-color);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--accent-color);
+        }
+
+        /* Sección de Biografía en Blanco */
+        .bio-section {
+            padding: 100px 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        .section-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--brand-red);
+            padding-left: 15px;
+            color: #ffffff;
+        }
+
+        .bio-content-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 50px;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted-color);
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            border-top: 1px solid var(--border-color);
+            padding: 50px 20px 30px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .copyright {
+            color: var(--muted-color);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            nav ul { display: none; }
+            .bio-section { padding: 50px 20px; }
+            .bio-content-box { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-banner">
+        Ministerio de Alabanza Marvin Cua
+    </div>
+
+    <header>
+        <a href="index.html" class="logo-area">
+            <div class="logo-text">Marvin Cua</div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="biografia.html" class="active">Biografía</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="recursos.html">Recursos</a></li>
+                <li><a href="tienda.html">Tienda</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="bio-section">
+        <h2 class="section-title">Biografía</h2>
+        
+        <!-- Espacio en blanco listo para redactar -->
+        <div class="bio-content-box">
+            <p>Espacio reservado para la historia y trayectoria del ministerio...</p>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="copyright">
+            &copy; 2026 Marvin Cua Ministerios. Todos los derechos reservados.
+        </div>
+    </footer>
+
+</body>
+</html>

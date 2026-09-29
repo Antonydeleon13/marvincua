@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Oficial y Merch | Marvin Cua Ministerios</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --card-bg: #161616;
+            --accent-color: #ffffff;
+            --brand-red: #ff2222;
+            --muted-color: #999999;
+            --border-color: #262626;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background-color: #000000;
+            color: var(--muted-color);
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            width: 100%;
+        }
+
+        /* Header Principal */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(11, 11, 11, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        .logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brand-red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--muted-color);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--accent-color);
+        }
+
+        /* Sección de Tienda / Merch */
+        .store-section {
+            padding: 80px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        .section-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--brand-red);
+            padding-left: 15px;
+            color: #ffffff;
+        }
+
+        /* Grid de Productos */
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            border-color: var(--brand-red);
+            transform: translateY(-5px);
+        }
+
+        .product-img-wrapper {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            background-color: #000;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.03);
+        }
+
+        .product-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.4rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .product-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .product-card p {
+            color: var(--muted-color);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .btn-primary {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #e01b1b;
+        }
+
+        .loading-text, .empty-text {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: var(--muted-color);
+            font-size: 1.1rem;
+            padding: 40px 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            border-top: 1px solid var(--border-color);
+            padding: 50px 20px 30px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .copyright {
+            color: var(--muted-color);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive de 2 columnas en celulares */
+        @media (max-width: 900px) {
+            header { padding: 15px 20px; }
+            nav ul { display: none; }
+            .store-section { padding: 40px 15px; }
+            
+            .store-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .product-card {
+                padding: 12px;
+            }
+
+            .product-card h3 {
+                font-size: 1rem;
+            }
+
+            .product-card p {
+                font-size: 0.75rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .product-price {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-banner">
+        Tienda Oficial de Merch y Artículos
+    </div>
+
+    <header>
+        <a href="index.html" class="logo-area">
+            <div class="logo-text">Marvin Cua</div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="recursos.html">Recursos</a></li>
+                <li><a href="tienda.html" class="active">Tienda</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="store-section">
+        <h2 class="section-title">Merch Oficial</h2>
+        <div class="store-grid" id="dynamic-merch-container">
+            <div class="loading-text">
+                <i class="fa-solid fa-spinner fa-spin"></i> Cargando productos desde Firebase...
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="copyright">
+            &copy; 2026 Marvin Cua Ministerios. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- Firebase SDK y lógica de carga -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAW9ADzuAaMcP-WIeDVtlOpw_L7etW5B1w",
+            authDomain: "marvin-cua.firebaseapp.com",
+            projectId: "marvin-cua",
+            storageBucket: "marvin-cua.firebasestorage.app",
+            messagingSenderId: "956482956723",
+            appId: "1:956482956723:web:24fe46155ba28bbd1a6fc6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function cargarMerch() {
+            const container = document.getElementById('dynamic-merch-container');
+            
+            try {
+                const q = query(collection(db, "merch"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                
+                if (querySnapshot.empty) {
+                    container.innerHTML = '<div class="empty-text">No hay productos de merch disponibles por el momento. ¡Vuelve pronto!</div>';
+                    return;
+                }
+
+                let htmlContent = '';
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const precioFormateado = data.precio ? `$${parseFloat(data.precio).toFixed(2)}` : '$15.00';
+                    
+                    htmlContent += `
+                        <div class="product-card">
+                            <div>
+                                <div class="product-img-wrapper">
+                                    <img src="${data.portadaUrl}" alt="${data.titulo}" class="product-img" draggable="false">
+                                </div>
+                                <div class="product-header-flex" style="margin-top: 10px;">
+                                    <h3 style="margin: 0; font-size: 1.2rem;">${data.titulo}</h3>
+                                    <span class="product-price">${precioFormateado}</span>
+                                </div>
+                                <p>${data.descripcion}</p>
+                            </div>
+                            <div>
+                                <button onclick="iniciarCompraMerch('${data.titulo}', '${precioFormateado}')" class="btn-primary">
+                                    <i class="fa-solid fa-cart-shopping"></i> Comprar (${precioFormateado})
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = htmlContent;
+
+                // Proteccion de clic derecho en la tienda
+                container.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                });
+
+            } catch (error) {
+                console.error("Error al cargar merch:", error);
+                container.innerHTML = '<div class="empty-text" style="color: var(--brand-red);">Hubo un error al conectar con Firebase.</div>';
+            }
+        }
+
+        window.iniciarCompraMerch = function(titulo, precio) {
+            const numeroWhatsApp = "50237864361";
+            const mensaje = encodeURIComponent(`Hola, me interesa comprar el producto "${titulo}" de merch por ${precio}. ¿Cómo procedemos con el pago y la entrega?`);
+            window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
+        }
+
+        window.addEventListener('DOMContentLoaded', cargarMerch);
+    </script>
+</body>
+</html>

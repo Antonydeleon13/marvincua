@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Marvin Cua Ministerios</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --accent-color: #ffffff;
+            --brand-red: #ff2222;
+            --muted-color: #888888;
+            --border-color: #222222;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background-color: #000000;
+            color: var(--muted-color);
+            text-align: center;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            width: 100%;
+        }
+
+        /* Header Principal */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 60px;
+            background-color: rgba(11, 11, 11, 0.9);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        .logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brand-red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--muted-color);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--accent-color);
+        }
+
+        /* Sección de Contacto Estilo Editorial */
+        .contact-section {
+            padding: 100px 20px 80px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Contenedor de la Foto de Perfil con Verificado Azul */
+        .profile-container {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin-bottom: 25px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .verified-badge {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            background-color: #0b0b0b;
+            color: #1d9bf0; /* Color azul verificado */
+            font-size: 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+
+        .section-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            line-height: 1.1;
+        }
+
+        .contact-subtitle {
+            color: var(--muted-color);
+            font-size: 1.05rem;
+            margin-bottom: 45px;
+            max-width: 600px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* Botón de WhatsApp Minimalista y Potente */
+        .whatsapp-btn {
+            background-color: #ffffff;
+            color: #0b0b0b;
+            padding: 16px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+            margin-bottom: 50px;
+        }
+
+        .whatsapp-btn i {
+            color: #25d366;
+            font-size: 1.2rem;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 34, 34, 0.2);
+        }
+
+        .whatsapp-btn:hover i {
+            color: #ffffff;
+        }
+
+        /* Redes Sociales Integradas */
+        .social-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-label {
+            color: var(--muted-color);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .social-link-item {
+            color: var(--muted-color);
+            font-size: 1.25rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link-item:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .copyright {
+            color: var(--muted-color);
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 20px 25px; }
+            nav ul { display: none; }
+            .contact-section { padding: 70px 20px 50px; }
+            .whatsapp-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-banner">
+        Ministerio de Alabanza Marvin Cua
+    </div>
+
+    <header>
+        <a href="index.html" class="logo-area">
+            <div class="logo-text">Marvin Cua</div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="biografia.html">Biografía</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="recursos.html">Recursos</a></li>
+                <li><a href="tienda.html">Tienda</a></li>
+                <li><a href="contacto.html" class="active">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="contact-section">
+        <!-- Foto de Perfil con Verificado Azul -->
+        <div class="profile-container">
+            <img src="perfil.jpg" alt="Marvin Cua" class="profile-img" draggable="false">
+            <div class="verified-badge" title="Cuenta Verificada">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+        </div>
+
+        <h2 class="section-title">Hablemos</h2>
+        <p class="contact-subtitle">¿Tienes alguna duda, propuesta de ministración o contratación para eventos? Escríbenos directamente y te responderemos a la brevedad.</p>
+        
+        <!-- Botón de WhatsApp Principal -->
+        <a href="https://wa.me/50237864361?text=Hola,%20me%20gustaría%20ponerme%20en%20contacto%20con%20el%20ministerio." target="_blank" class="whatsapp-btn">
+            <i class="fa-brands fa-whatsapp"></i> Escribir por WhatsApp
+        </a>
+
+        <!-- Redes Sociales Limpias -->
+        <div class="social-wrapper">
+            <span class="social-label">Plataformas Oficiales</span>
+            <div class="social-links">
+                <a href="https://youtube.com/@marvincuaministerios?si=_QsYv6v8vbi3-4-Q" target="_blank" class="social-link-item" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.facebook.com/share/1Jb7PrSLCg/?mibextid=wwXIfr" target="_blank" class="social-link-item" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://open.spotify.com/artist/71zfXaol6mnts6Q6AMljs2?si=ckjYxr3uSumL3QG2mhSG0A&utm_source=copy-link" target="_blank" class="social-link-item" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+                <a href="https://www.tiktok.com/@marvincuaoficial?_r=1&_t=ZS-9A7cKZTbKlD" target="_blank" class="social-link-item" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="copyright">
+            &copy; 2026 Marvin Cua Ministerios. Todos los derechos reservados.
+        </div>
+    </footer>
+
+</body>
+</html>
