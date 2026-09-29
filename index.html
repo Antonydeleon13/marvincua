@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvin Cua | Ministerio de Alabanza</title>
+    <!-- Google Fonts: Importamos Oswald / Anton para el estilo de letra tipo Switchfoot -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome para Iconos Planos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --card-bg: #161616;
+            --accent-color: #ffffff;
+            --brand-red: #ff2222;
+            --muted-color: #999999;
+            --border-color: #262626;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Barra superior de anuncios/eventos */
+        .top-banner {
+            background-color: #000000;
+            color: var(--muted-color);
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            width: 100%;
+        }
+
+        /* Header Principal */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(11, 11, 11, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        .logo-icon {
+            font-size: 1.2rem;
+            color: var(--brand-red);
+            transform: skewX(-10deg);
+        }
+
+        .logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brand-red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--muted-color);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section tipo Concierto (Ancho completo 100vw) */
+       .hero {
+            position: relative;
+            width: 100vw;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(11,11,11,0.85)), url('1.jpg') no-repeat center center;
+            background-size: cover;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: var(--brand-red);
+            text-shadow: 0 10px 30px rgba(0,0,0,0.9);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #ffffff;
+            max-width: 600px;
+            letter-spacing: 1px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        /* Barra Estilo Switchfoot en Blanco Abajo de la Foto */
+        .switchfoot-links-bar {
+            width: 100%;
+            background-color: #e3d8c3;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            border-bottom: 1px solid #d0c4af;
+        }
+
+        .sf-link-box {
+            background-color: #e3d8c3;
+            color: #000000;
+            text-align: center;
+            padding: 30px 20px;
+            text-decoration: none;
+            font-family: 'Anton', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            border-right: 1px solid #d0c4af;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sf-link-box:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Secciones Generales */
+        section {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--brand-red);
+            padding-left: 15px;
+            color: #ffffff;
+        }
+
+        /* Tienda de Recursos (Pistas, Secuencias, Multitracks) */
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card:hover {
+            border-color: var(--brand-red);
+            transform: translateY(-5px);
+        }
+
+        .product-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: #222;
+            padding: 4px 10px;
+            border-radius: 20px;
+            align-self: flex-start;
+            margin-bottom: 15px;
+            color: var(--brand-red);
+            font-weight: 600;
+        }
+
+        .product-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            color: var(--muted-color);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .btn-primary {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #e01b1b;
+        }
+
+        /* Footer y Redes Sociales */
+        footer {
+            background-color: #050505;
+            border-top: 1px solid var(--border-color);
+            padding: 80px 50px 40px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: var(--accent-color);
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            border-color: var(--brand-red);
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--muted-color);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            header { padding: 15px 20px; }
+            nav ul { display: none; }
+            section { padding: 60px 20px; }
+            .footer-content { flex-direction: column; align-items: flex-start; }
+            .sf-link-box { font-size: 1.5rem; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        Próximos Lanzamientos y Recursos de Adoración Disponibles
+    </div>
+
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo-area">
+          
+            <div class="logo-text">Marvin Cua</div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#inicio" class="active">Inicio</a></li>
+                <li><a href="#biografia">Biografía</a></li>
+                <li><a href="#Eventos">Eventos</a></li>
+                <li><a href="recursos.html">Recursos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <h1>Marvin Cua</h1>
+        <p>Ministerio de Alabanza y Adoración Enfocado en Llevar la Presencia de Dios a las Naciones.</p>
+        <a href="#tienda" class="btn-primary">
+            <i class="fa-solid fa-store"></i> Explorar Tienda
+        </a>
+    </section>
+
+    <!-- Sección Estilo Switchfoot en Blanco Bajo la Foto -->
+    <div class="switchfoot-links-bar">
+        <a href="#Eventos" class="sf-link-box">Eventos</a>
+        <a href="#tienda" class="sf-link-box">Escuchar</a>
+        <a href="#tienda" class="sf-link-box">Tienda</a>
+    </div>
+
+    <!-- Tienda Oficial Section (Pistas, Secuencias, Multitracks) -->
+    <section id="tienda">
+        <h2 class="section-title">Tienda Oficial</h2>
+        <div class="store-grid" id="products-container">
+            <!-- Producto 1 -->
+            <div class="product-card">
+                <div>
+                    <span class="product-tag">Multitrack</span>
+                    <h3>Sn. En Su Presencia (Pack Completo)</h3>
+                    <p>Incluye stems individuales (multitracks), click y guía para el equipo de músicos y multimedia.</p>
+                </div>
+                <button class="btn-primary" onclick="descargarRecurso('multitrack-1')">
+                    <i class="fa-solid fa-download"></i> Obtener Recurso
+                </button>
+            </div>
+            <!-- Producto 2 -->
+            <div class="product-card">
+                <div>
+                    <span class="product-tag">Secuencia</span>
+                    <h3>Secuencia Original - En Vivo</h3>
+                    <p>Secuencia sincronizada para DAW con patches de sintetizadores y pistas originales del álbum.</p>
+                </div>
+                <button class="btn-primary" onclick="descargarRecurso('secuencia-1')">
+                    <i class="fa-solid fa-download"></i> Obtener Recurso
+                </button>
+            </div>
+            <!-- Producto 3 -->
+            <div class="product-card">
+                <div>
+                    <span class="product-tag">Pista / Instrumental</span>
+                    <h3>Pista de Acompañamiento Alta Calidad</h3>
+                    <p>Versión instrumental oficial en formato WAV y MP3 lista para ministerios e interpretaciones en vivo.</p>
+                </div>
+                <button class="btn-primary" onclick="descargarRecurso('pista-1')">
+                    <i class="fa-solid fa-download"></i> Obtener Recurso
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer y Redes Sociales -->
+ <footer id="contacto" style="background-color: #050505; border-top: 1px solid var(--border-color); padding: 70px 20px 40px; text-align: center;">
+        <div class="footer-content" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 25px; margin-bottom: 40px;">
+            <div>
+                <p style="color: var(--muted-color); font-size: 0.9rem;">Ministerio de Alabanza Marvin Cua</p>
+            </div>
+            <div class="social-icons" style="display: flex; justify-content: center; gap: 20px;">
+                <a href="https://youtube.com/@marvincuaministerios?si=_QsYv6v8vbi3-4-Q" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.facebook.com/share/1Jb7PrSLCg/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://open.spotify.com/artist/71zfXaol6mnts6Q6AMljs2?si=ckjYxr3uSumL3QG2mhSG0A&utm_source=copy-link" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+                <a href="https://www.tiktok.com/@marvincuaoficial?_r=1&_t=ZS-9A7cKZTbKlD" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="copyright" style="text-align: center; color: var(--muted-color); font-size: 0.8rem; letter-spacing: 1px; border-top: 1px solid var(--border-color); padding-top: 25px; max-width: 800px; margin: 0 auto;">
+            &copy; 2026 Marvin Cua Ministerios. Todos los derechos reservados.
+            <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted-color); letter-spacing: 0.5px;">
+                Creado por <a href="https://www.instagram.com/thisisantony_?stkn=b25mZWRvOGUxd2lj&utm_source=qr" target="_blank" style="color: var(--brand-red); text-decoration: none; font-weight: 700;">Antony de León</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK e Inicialización con tus credenciales -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAW9ADzuAaMcP-WIeDVtlOpw_L7etW5B1w",
+            authDomain: "marvin-cua.firebaseapp.com",
+            projectId: "marvin-cua",
+            storageBucket: "marvin-cua.firebasestorage.app",
+            messagingSenderId: "956482956723",
+            appId: "1:956482956723:web:24fe46155ba28bbd1a6fc6"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // Función global de ejemplo para conectar con Storage / Firestore para descargas de pistas y multitracks
+        window.descargarRecurso = async function(nombreArchivo) {
+            try {
+                const archivoRef = ref(storage, `recursos/${nombreArchivo}.zip`);
+                const url = await getDownloadURL(archivoRef);
+                window.open(url, '_blank');
+            } catch (error) {
+                console.error("Error al obtener el archivo de Firebase Storage:", error);
+                alert("El recurso estará disponible próximamente en la tienda.");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Marvin Cua Ministerios</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome para Iconos Planos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --card-bg: #161616;
+            --accent-color: #ffffff;
+            --brand-red: #ff2222;
+            --muted-color: #999999;
+            --border-color: #262626;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Header Admin */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(11, 11, 11, 0.95);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        .logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brand-red);
+        }
+
+        .back-site {
+            color: var(--muted-color);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .back-site:hover {
+            color: var(--accent-color);
+        }
+
+        /* Contenedores Principales */
+        .admin-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px;
+            width: 90%;
+        }
+
+        .admin-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .admin-subtitle {
+            color: var(--muted-color);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: var(--muted-color);
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: #0b0b0b;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 12px 15px;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--brand-red);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .btn-upload {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            width: 100%;
+            padding: 14px;
+            border-radius: 4px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-upload:hover {
+            background-color: #e01b1b;
+        }
+
+        /* Listado de Recursos Existentes */
+        .resources-list {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .resource-item-admin {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #0b0b0b;
+            border: 1px solid var(--border-color);
+            padding: 15px 20px;
+            border-radius: 6px;
+            gap: 15px;
+        }
+
+        .resource-info-flex {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .resource-thumb {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .resource-details h4 {
+            font-size: 1rem;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .resource-details span {
+            font-size: 0.8rem;
+            color: var(--muted-color);
+            text-transform: uppercase;
+        }
+
+        .resource-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-action-edit, .btn-action-delete {
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-action-edit {
+            background-color: #262626;
+            color: #ffffff;
+        }
+
+        .btn-action-edit:hover {
+            background-color: #3b3b3b;
+        }
+
+        .btn-action-delete {
+            background-color: rgba(255, 34, 34, 0.2);
+            color: var(--brand-red);
+        }
+
+        .btn-action-delete:hover {
+            background-color: var(--brand-red);
+            color: #ffffff;
+        }
+
+        /* Modal Personalizado Global */
+        .custom-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .custom-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .custom-modal {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 35px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .custom-modal-overlay.active .custom-modal {
+            transform: translateY(0);
+        }
+
+        .custom-modal i {
+            font-size: 2.5rem;
+            color: var(--brand-red);
+            margin-bottom: 15px;
+        }
+
+        .custom-modal h3 {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .custom-modal p {
+            color: var(--muted-color);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-modal-cancel {
+            background-color: #262626;
+            color: #ffffff;
+            flex: 1;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-modal-cancel:hover {
+            background-color: #333333;
+        }
+
+        .btn-modal-confirm {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            flex: 1;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-modal-confirm:hover {
+            background-color: #e01b1b;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #050505;
+            border-top: 1px solid var(--border-color);
+            padding: 30px;
+            text-align: center;
+            color: var(--muted-color);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Admin -->
+    <header>
+        <a href="#" class="logo-area">
+            <div class="logo-text">Panel Admin</div>
+        </a>
+        <a href="index.html" class="back-site"><i class="fa-solid fa-arrow-left"></i> Ver Sitio Web</a>
+    </header>
+
+    <!-- Formulario de Subida / Edición -->
+    <div class="admin-container">
+        <h1 class="admin-title" id="form-title">Subir Recurso</h1>
+        <p class="admin-subtitle" id="form-subtitle">Sube pistas, secuencias o multitracks, su muestra corta y su archivo completo protegido.</p>
+        
+        <form id="upload-form">
+            <input type="hidden" id="edit-id" value="">
+            
+            <div class="form-group">
+                <label for="titulo">Título del Recurso / Canción</label>
+                <input type="text" id="titulo" class="form-control" placeholder="Ej. En Su Presencia (Multitrack)" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoría</label>
+                <select id="categoria" class="form-control" required>
+                    <option value="Multitrack">Multitrack</option>
+                    <option value="Secuencia">Secuencia</option>
+                    <option value="Pista / Instrumental">Pista / Instrumental</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio ($ USD)</label>
+                <input type="number" step="0.01" id="precio" class="form-control" placeholder="Ej. 5.00" value="5.00" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción Breve</label>
+                <textarea id="descripcion" class="form-control" placeholder="Detalles de lo que incluye el pack..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="portada">Imagen de Portada (JPG, PNG)</label>
+                <input type="file" id="portada" class="form-control" accept="image/*" style="padding: 10px;">
+                <small style="color: var(--muted-color); font-size: 0.75rem;" id="portada-help">Obligatorio al crear. Opcional al editar.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="audio-muestra">Audio de Muestra (Versión corta / Preview MP3)</label>
+                <input type="file" id="audio-muestra" class="form-control" accept="audio/mp3,audio/*" style="padding: 10px;">
+                <small style="color: var(--muted-color); font-size: 0.75rem;">Este es el fragmento corto que sonará en la web de recursos.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="archivo-completo">Archivo Completo (ZIP / Multitracks / Pista Completa)</label>
+                <input type="file" id="archivo-completo" class="form-control" style="padding: 10px;">
+                <small style="color: var(--muted-color); font-size: 0.75rem;">Este es el archivo de valor que se entrega tras confirmar el pago.</small>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button type="submit" class="btn-upload" id="submit-btn" style="flex: 2;">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Subir Recurso
+                </button>
+                <button type="button" id="cancel-edit-btn" class="btn-upload" style="flex: 1; background-color: #262626; display: none;">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Contenedor para ver y administrar pistas anteriores -->
+    <div class="admin-container">
+        <h2 class="admin-title" style="font-size: 1.5rem;">Pistas y Recursos Subidos</h2>
+        <p class="admin-subtitle">Administra, edita o elimina el contenido existente.</p>
+        
+        <div class="resources-list" id="admin-resources-list">
+            <div style="text-align: center; color: var(--muted-color); padding: 20px;">Cargando recursos...</div>
+        </div>
+    </div>
+
+    <!-- Modal Personalizado (Confirmaciones y Avisos) -->
+    <div class="custom-modal-overlay" id="custom-modal">
+        <div class="custom-modal">
+            <i class="fa-solid fa-circle-exclamation" id="modal-icon"></i>
+            <h3 id="modal-title">Aviso</h3>
+            <p id="modal-message">Mensaje informativo...</p>
+            <div class="modal-buttons" id="modal-buttons-container">
+                <button class="btn-modal-confirm" onclick="cerrarModal()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 Marvin Cua Ministerios. Panel de Administración.
+    </footer>
+
+    <!-- Firebase SDK y lógica de gestión -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAW9ADzuAaMcP-WIeDVtlOpw_L7etW5B1w",
+            authDomain: "marvin-cua.firebaseapp.com",
+            projectId: "marvin-cua",
+            storageBucket: "marvin-cua.firebasestorage.app",
+            messagingSenderId: "956482956723",
+            appId: "1:956482956723:web:24fe46155ba28bbd1a6fc6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        const uploadForm = document.getElementById('upload-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const cancelEditBtn = document.getElementById('cancel-edit-btn');
+        const editIdInput = document.getElementById('edit-id');
+        const listContainer = document.getElementById('admin-resources-list');
+
+        // Sistema de Modales Global
+        window.mostrarModal = function(titulo, mensaje, tipo = 'info', onConfirm = null) {
+            document.getElementById('modal-title').textContent = titulo;
+            document.getElementById('modal-message').textContent = mensaje;
+            const iconEl = document.getElementById('modal-icon');
+            const buttonsContainer = document.getElementById('modal-buttons-container');
+
+            if (tipo === 'confirm') {
+                iconEl.className = 'fa-solid fa-triangle-exclamation';
+                iconEl.style.color = 'var(--brand-red)';
+                buttonsContainer.innerHTML = `
+                    <button class="btn-modal-cancel" onclick="cerrarModal()">Cancelar</button>
+                    <button class="btn-modal-confirm" id="modal-confirm-action">Confirmar</button>
+                `;
+                document.getElementById('modal-confirm-action').onclick = () => {
+                    cerrarModal();
+                    if (onConfirm) onConfirm();
+                };
+            } else {
+                iconEl.className = 'fa-solid fa-circle-check';
+                iconEl.style.color = '#2ecc71';
+                buttonsContainer.innerHTML = `<button class="btn-modal-confirm" onclick="cerrarModal()">Aceptar</button>`;
+            }
+
+            document.getElementById('custom-modal').classList.add('active');
+        };
+
+        window.cerrarModal = function() {
+            document.getElementById('custom-modal').classList.remove('active');
+        };
+
+        // Cargar listado en el Admin
+        async function cargarListaAdmin() {
+            try {
+                const q = query(collection(db, "recursos"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    listContainer.innerHTML = '<div style="text-align: center; color: var(--muted-color); padding: 20px;">No hay recursos subidos todavía.</div>';
+                    return;
+                }
+
+                let html = '';
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const id = docSnap.id;
+                    const precioStr = data.precio ? `$${parseFloat(data.precio).toFixed(2)}` : '$5.00';
+
+                    html += `
+                        <div class="resource-item-admin">
+                            <div class="resource-info-flex">
+                                <img src="${data.portadaUrl || ''}" class="resource-thumb" alt="Portada">
+                                <div class="resource-details">
+                                    <h4>${data.titulo}</h4>
+                                    <span>${data.categoria || 'Recurso'} • ${precioStr}</span>
+                                </div>
+                            </div>
+                            <div class="resource-actions">
+                                <button class="btn-action-edit" onclick="prepararEdicion('${id}', '${escapeHtml(data.titulo)}', '${data.categoria}', '${data.precio}', '${escapeHtml(data.descripcion)}', '${data.portadaUrl}', '${data.muestraUrl || ''}', '${data.archivoUrl || ''}')">
+                                    <i class="fa-solid fa-pen"></i> Editar
+                                </button>
+                                <button class="btn-action-delete" onclick="confirmarBorrado('${id}', '${escapeHtml(data.titulo)}')">
+                                    <i class="fa-solid fa-trash"></i> Borrar
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                listContainer.innerHTML = html;
+            } catch (error) {
+                console.error("Error cargando admin:", error);
+                listContainer.innerHTML = '<div style="color: var(--brand-red); text-align: center;">Error al cargar la lista.</div>';
+            }
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+        }
+
+        // Preparar formulario para editar
+        let cachedDataToEdit = {};
+        window.prepararEdicion = function(id, titulo, categoria, precio, descripcion, portadaUrl, muestraUrl, archivoUrl) {
+            editIdInput.value = id;
+            document.getElementById('titulo').value = titulo;
+            document.getElementById('categoria').value = categoria;
+            document.getElementById('precio').value = precio || '5.00';
+            document.getElementById('descripcion').value = descripcion;
+
+            cachedDataToEdit = { portadaUrl, muestraUrl, archivoUrl };
+
+            document.getElementById('form-title').textContent = 'Editar Recurso';
+            document.getElementById('form-subtitle').textContent = `Modificando: ${titulo}`;
+            submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios';
+            cancelEditBtn.style.display = 'block';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.cancelarEdicion = function() {
+            editIdInput.value = '';
+            uploadForm.reset();
+            cachedDataToEdit = {};
+            document.getElementById('form-title').textContent = 'Subir Recurso';
+            document.getElementById('form-subtitle').textContent = 'Sube pistas, secuencias o multitracks, su muestra corta y su archivo completo protegido.';
+            submitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Subir Recurso';
+            cancelEditBtn.style.display = 'none';
+        };
+
+        cancelEditBtn.addEventListener('click', cancelarEdicion);
+
+        // Confirmar borrado con modal
+        window.confirmarBorrado = function(id, titulo) {
+            window.mostrarModal('¿Eliminar recurso?', `Estás a punto de borrar "${titulo}". Esta acción no se puede deshacer.`, 'confirm', async () => {
+                try {
+                    await deleteDoc(doc(db, "recursos", id));
+                    window.mostrarModal('¡Eliminado!', 'El recurso ha sido borrado con éxito.');
+                    cargarListaAdmin();
+                } catch (error) {
+                    console.error("Error al borrar:", error);
+                    window.mostrarModal('Error', 'No se pudo eliminar el recurso.');
+                }
+            });
+        };
+
+        // Enviar formulario (Crear o Actualizar)
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const idEdicion = editIdInput.value;
+            const titulo = document.getElementById('titulo').value;
+            const categoria = document.getElementById('categoria').value;
+            const precio = document.getElementById('precio').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const portadaInput = document.getElementById('portada').files[0];
+            const muestraInput = document.getElementById('audio-muestra').files[0];
+            const archivoCompletoInput = document.getElementById('archivo-completo').files[0];
+
+            if (!idEdicion && (!portadaInput || !muestraInput || !archivoCompletoInput)) {
+                window.mostrarModal('Faltan archivos', 'Por favor selecciona la portada, el audio de muestra y el archivo completo.');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Subiendo archivos...';
+
+            try {
+                let portadaUrl = cachedDataToEdit.portadaUrl || '';
+                let muestraUrl = cachedDataToEdit.muestraUrl || '';
+                let archivoUrl = cachedDataToEdit.archivoUrl || '';
+
+                if (portadaInput) {
+                    const portadaRef = ref(storage, `portadas/${Date.now()}_${portadaInput.name}`);
+                    const snapP = await uploadBytes(portadaRef, portadaInput);
+                    portadaUrl = await getDownloadURL(snapP.ref);
+                }
+
+                if (muestraInput) {
+                    const muestraRef = ref(storage, `muestras/${Date.now()}_${muestraInput.name}`);
+                    const snapM = await uploadBytes(muestraRef, muestraInput);
+                    muestraUrl = await getDownloadURL(snapM.ref);
+                }
+
+                if (archivoCompletoInput) {
+                    const archivoRef = ref(storage, `recursos_completos/${Date.now()}_${archivoCompletoInput.name}`);
+                    const snapA = await uploadBytes(archivoRef, archivoCompletoInput);
+                    archivoUrl = await getDownloadURL(snapA.ref);
+                }
+
+                if (idEdicion) {
+                    // Actualizar
+                    await updateDoc(doc(db, "recursos", idEdicion), {
+                        titulo, categoria, precio, descripcion, portadaUrl, muestraUrl, archivoUrl
+                    });
+                    window.mostrarModal('¡Actualizado!', 'Los cambios se han guardado correctamente.');
+                    cancelarEdicion();
+                } else {
+                    // Crear nuevo
+                    await addDoc(collection(db, "recursos"), {
+                        titulo, categoria, precio, descripcion, portadaUrl, muestraUrl, archivoUrl,
+                        createdAt: serverTimestamp()
+                    });
+                    window.mostrarModal('¡Éxito!', 'El recurso completo y su muestra han sido subidos con éxito.');
+                    uploadForm.reset();
+                }
+
+                cargarListaAdmin();
+            } catch (error) {
+                console.error("Error en operación:", error);
+                window.mostrarModal('Error', 'Hubo un error al procesar la solicitud.');
+            } finally {
+                submitBtn.disabled = false;
+                if (idEdicion) {
+                    submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios';
+                } else {
+                    submitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Subir Recurso';
+                }
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', cargarListaAdmin);
+    </script>
+</body>
+</html>

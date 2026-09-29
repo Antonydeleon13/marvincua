@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos y Pistas | Marvin Cua Ministerios</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome para Iconos Planos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --card-bg: #161616;
+            --accent-color: #ffffff;
+            --brand-red: #ff2222;
+            --muted-color: #999999;
+            --border-color: #262626;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Barra superior de anuncios/eventos */
+        .top-banner {
+            background-color: #000000;
+            color: var(--muted-color);
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            width: 100%;
+        }
+
+        /* Header Principal */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(11, 11, 11, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        .logo-icon {
+            font-size: 1.2rem;
+            color: var(--brand-red);
+            transform: skewX(-10deg);
+        }
+
+        .logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brand-red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--muted-color);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--accent-color);
+        }
+
+        /* Sección Principal de Recursos */
+        .resources-section {
+            padding: 80px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        .section-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--brand-red);
+            padding-left: 15px;
+            color: #ffffff;
+        }
+
+        /* Botones de Filtro por Categoría */
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: var(--card-bg);
+            color: var(--muted-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            border-color: var(--brand-red);
+        }
+
+       
+        /* Grid de Cards en formato Cuadrado Profesional */
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px; /* Reducido ligeramente para celular */
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%; /* Fuerza a que todas ocupen la misma altura en la fila */
+        }
+
+        .product-card:hover {
+            border-color: var(--brand-red);
+            transform: translateY(-5px);
+        }
+
+        /* Portada Cuadrada Perfecta */
+        .product-img-wrapper {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            background-color: #000;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.03);
+        }
+
+        .product-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.4rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .product-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .product-card p {
+            color: var(--muted-color);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .preview-notice {
+            font-size: 0.75rem;
+            color: #ffaa00;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Reproductor Personalizado */
+        .custom-audio-player {
+            background-color: #0b0b0b;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-play-custom {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .btn-play-custom:hover {
+            background-color: #e01b1b;
+            transform: scale(1.05);
+        }
+
+        .audio-progress-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .audio-bar-wrapper {
+            background-color: #262626;
+            height: 6px;
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audio-bar-progress {
+            background-color: var(--brand-red);
+            height: 100%;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .audio-time-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--muted-color);
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #e01b1b;
+        }
+
+        /* Modal Personalizado (Confirm) */
+        .custom-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .custom-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .custom-modal {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 35px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .custom-modal-overlay.active .custom-modal {
+            transform: translateY(0);
+        }
+
+        .custom-modal i {
+            font-size: 2.5rem;
+            color: var(--brand-red);
+            margin-bottom: 15px;
+        }
+
+        .custom-modal h3 {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .custom-modal p {
+            color: var(--muted-color);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-modal-cancel {
+            background-color: #262626;
+            color: #ffffff;
+            flex: 1;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-modal-cancel:hover {
+            background-color: #333333;
+        }
+
+        .btn-modal-confirm {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            flex: 1;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-modal-confirm:hover {
+            background-color: #e01b1b;
+        }
+
+        .loading-text, .empty-text {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: var(--muted-color);
+            font-size: 1.1rem;
+            padding: 40px 0;
+        }
+
+        /* Footer Centrado */
+        footer {
+            background-color: #050505;
+            border-top: 1px solid var(--border-color);
+            padding: 70px 20px 40px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: var(--accent-color);
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            border-color: var(--brand-red);
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--muted-color);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .creator-credit {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--muted-color);
+            letter-spacing: 0.5px;
+        }
+
+        .creator-credit a {
+            color: var(--brand-red);
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .creator-credit a:hover {
+            text-decoration: underline;
+        }
+
+      /* Responsive */
+        @media (max-width: 900px) {
+            header { padding: 15px 20px; }
+            nav ul { display: none; }
+            .resources-section { padding: 20px 10px; } /* Menos espacio a los lados para aprovechar la pantalla */
+            
+            .store-grid {
+                grid-template-columns: repeat(2, 1fr); /* Exactamente 2 columnas */
+                gap: 10px; /* Espacio compacto y uniforme entre tarjetas */
+            }
+
+            .product-card {
+                padding: 10px; /* Padding más compacto en móviles */
+            }
+
+            .product-card h3 {
+                font-size: 1rem; /* Título un poco más pequeño para que no rompa feo en 2 columnas */
+            }
+
+            .product-card p {
+                font-size: 0.75rem; /* Descripción más compacta */
+                display: -webkit-box;
+                -webkit-line-clamp: 2; /* Limita la descripción a máximo 2 líneas para que todas midan igual */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .product-price {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        Recursos, Pistas y Secuencias Oficiales
+    </div>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo-area">
+          
+            <div class="logo-text">Marvin Cua</div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html#biografia">Biografía</a></li>
+                <li><a href="index.html#Eventos">Eventos</a></li>
+                <li><a href="recursos.html" class="active">Recursos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenido de Recursos Dinámico -->
+    <section class="resources-section">
+        <h2 class="section-title">Recursos</h2>
+        
+        <!-- Botones de Filtro interactivos -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filtrarCategoria('Todos', this)">Todos</button>
+            <button class="filter-btn" onclick="filtrarCategoria('Multitrack', this)">Multitrack</button>
+            <button class="filter-btn" onclick="filtrarCategoria('Secuencia', this)">Secuencia</button>
+            <button class="filter-btn" onclick="filtrarCategoria('Pista / Instrumental', this)">Pista / Instrumental</button>
+        </div>
+
+        <div class="store-grid" id="dynamic-resources-container">
+            <div class="loading-text">
+                <i class="fa-solid fa-spinner fa-spin"></i> Cargando recursos desde Firebase...
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Personalizado (Confirm) -->
+    <div class="custom-modal-overlay" id="custom-modal">
+        <div class="custom-modal">
+            <i class="fa-solid fa-headphones-simple"></i>
+            <h3>Muestra finalizada</h3>
+            <p>Has escuchado el fragmento de la muestra. ¿Te gustaría adquirir el pack completo para tener acceso total e ilimitado?</p>
+            <div class="modal-buttons">
+                <button class="btn-modal-cancel" onclick="cerrarModal()">Seguir escuchando</button>
+                <button class="btn-modal-confirm" id="modal-buy-btn">Sí, Comprar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Centrado -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px;">
+                   
+                   
+                </div>
+                <p style="color: var(--muted-color); font-size: 0.9rem;">Ministerio de Alabanza Marvin Cua</p>
+            </div>
+            <div class="social-icons">
+                <a href="https://youtube.com/@marvincuaministerios?si=_QsYv6v8vbi3-4-Q" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.facebook.com/share/1Jb7PrSLCg/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://open.spotify.com/artist/71zfXaol6mnts6Q6AMljs2?si=ckjYxr3uSumL3QG2mhSG0A&utm_source=copy-link" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+                <a href="https://www.tiktok.com/@marvincuaoficial?_r=1&_t=ZS-9A7cKZTbKlD" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Marvin Cua Ministerios. Todos los derechos reservados.
+            <div class="creator-credit">
+                Creado por <a href="https://www.instagram.com/thisisantony_?stkn=b25mZWRvOGUxd2lj&utm_source=qr" target="_blank">Antony de León</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK y lógica de tienda con reproductor personalizado -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAW9ADzuAaMcP-WIeDVtlOpw_L7etW5B1w",
+            authDomain: "marvin-cua.firebaseapp.com",
+            projectId: "marvin-cua",
+            storageBucket: "marvin-cua.firebasestorage.app",
+            messagingSenderId: "956482956723",
+            appId: "1:956482956723:web:24fe46155ba28bbd1a6fc6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let currentActiveAudio = null;
+        let pendingBuyUrl = '';
+        let listaGlobalRecursos = [];
+
+        async function cargarRecursos() {
+            const container = document.getElementById('dynamic-resources-container');
+            
+            try {
+                const q = query(collection(db, "recursos"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                
+                if (querySnapshot.empty) {
+                    container.innerHTML = '<div class="empty-text">No hay recursos subidos en la tienda todavía. ¡Sube el primero desde el panel de administración!</div>';
+                    return;
+                }
+
+                listaGlobalRecursos = [];
+                querySnapshot.forEach((doc) => {
+                    listaGlobalRecursos.push({ id: doc.id, ...doc.data() });
+                });
+
+                renderizarRecursos(listaGlobalRecursos);
+
+            } catch (error) {
+                console.error("Error al cargar los recursos de Firestore:", error);
+                container.innerHTML = '<div class="empty-text" style="color: var(--brand-red);">Hubo un error al conectar con Firebase. Revisa tu conexión.</div>';
+            }
+        }
+
+        window.renderizarRecursos = function(recursos) {
+            const container = document.getElementById('dynamic-resources-container');
+
+            if (recursos.length === 0) {
+                container.innerHTML = '<div class="empty-text">No hay recursos en esta categoría.</div>';
+                return;
+            }
+
+            let htmlContent = '';
+            recursos.forEach((data) => {
+                const precioFormateado = data.precio ? `$${parseFloat(data.precio).toFixed(2)}` : '$5.00';
+                const idUnico = data.id;
+                
+                htmlContent += `
+                    <div class="product-card">
+                        <div>
+                            <div class="product-img-wrapper">
+                                <img src="${data.portadaUrl}" alt="${data.titulo}" class="product-img" draggable="false">
+                            </div>
+                            
+                            <!-- Texto rojo más pequeño y fuera del box -->
+                            <span style="font-size: 0.55rem; color: var(--brand-red); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; display: block; margin-top: 10px; margin-bottom: 4px;">
+                                ${data.categoria || 'Recurso'}
+                            </span>
+
+                            <div class="product-header-flex" style="margin-bottom: 8px;">
+                                <h3 style="margin: 0; font-size: 1.2rem;">${data.titulo}</h3>
+                                <span class="product-price">${precioFormateado}</span>
+                            </div>
+                            
+                            <p>${data.descripcion}</p>
+                            <div class="preview-notice"><i class="fa-solid fa-headphones"></i> Muestra de audio</div>
+                        </div>
+                        <div>
+                            <!-- Reproductor Personalizado -->
+                            <div class="custom-audio-player">
+                                <button class="btn-play-custom" onclick="togglePlay('${idUnico}')">
+                                    <i class="fa-solid fa-play" id="play-icon-${idUnico}"></i>
+                                </button>
+                                <div class="audio-progress-container">
+                                    <div class="audio-bar-wrapper" onclick="seekAudio(event, '${idUnico}')">
+                                        <div class="audio-bar-progress" id="progress-${idUnico}"></div>
+                                    </div>
+                                    <div class="audio-time-info">
+                                        <span id="current-time-${idUnico}">0:00</span>
+                                        <span id="duration-${idUnico}">0:00</span>
+                                    </div>
+                                </div>
+                                <audio id="audio-${idUnico}" src="${data.muestraUrl}" preload="metadata"></audio>
+                            </div>
+
+                            <button onclick="iniciarCompra('${data.titulo}', '${precioFormateado}')" class="btn-primary">
+                                <i class="fa-solid fa-cart-shopping"></i> Comprar (${precioFormateado})
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = htmlContent;
+
+            // Bloquear clic derecho (contextmenu) en toda la sección de la tienda para proteger imágenes y audios
+            container.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+            });
+
+            // Configurar eventos del reproductor personalizado
+            recursos.forEach((data) => {
+                const idUnico = data.id;
+                const audioElement = document.getElementById(`audio-${idUnico}`);
+                const playIcon = document.getElementById(`play-icon-${idUnico}`);
+                const progressBar = document.getElementById(`progress-${idUnico}`);
+                const currentTimeEl = document.getElementById(`current-time-${idUnico}`);
+                const durationEl = document.getElementById(`duration-${idUnico}`);
+                
+                if (audioElement) {
+                    audioElement.addEventListener('loadedmetadata', () => {
+                        durationEl.textContent = formatearTiempo(audioElement.duration);
+                    });
+
+                    audioElement.addEventListener('timeupdate', () => {
+                        if (audioElement.duration) {
+                            const porcentaje = (audioElement.currentTime / audioElement.duration) * 100;
+                            progressBar.style.width = `${porcentaje}%`;
+                            currentTimeEl.textContent = formatearTiempo(audioElement.currentTime);
+                        }
+                    });
+
+                    audioElement.addEventListener('ended', () => {
+                        playIcon.className = "fa-solid fa-play";
+                        progressBar.style.width = '0%';
+                        currentTimeEl.textContent = "0:00";
+                    });
+                }
+            });
+        }
+
+        window.togglePlay = function(id) {
+            const audio = document.getElementById(`audio-${id}`);
+            const playIcon = document.getElementById(`play-icon-${id}`);
+
+            if (currentActiveAudio && currentActiveAudio !== audio) {
+                currentActiveAudio.pause();
+                const prevId = currentActiveAudio.id.replace('audio-', '');
+                const prevIcon = document.getElementById(`play-icon-${prevId}`);
+                if (prevIcon) prevIcon.className = "fa-solid fa-play";
+            }
+
+            if (audio.paused) {
+                audio.play();
+                playIcon.className = "fa-solid fa-pause";
+                currentActiveAudio = audio;
+            } else {
+                audio.pause();
+                playIcon.className = "fa-solid fa-play";
+            }
+        }
+
+        window.seekAudio = function(event, id) {
+            const audio = document.getElementById(`audio-${id}`);
+            const wrapper = event.currentTarget;
+            const clickX = event.offsetX;
+            const width = wrapper.clientWidth;
+            if (audio.duration) {
+                audio.currentTime = (clickX / width) * audio.duration;
+            }
+        }
+
+        function formatearTiempo(segundos) {
+            const min = Math.floor(segundos / 60);
+            const sec = Math.floor(segundos % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        window.filtrarCategoria = function(categoria, btnElement) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            if (categoria === 'Todos') {
+                renderizarRecursos(listaGlobalRecursos);
+            } else {
+                const filtrados = listaGlobalRecursos.filter(item => item.categoria === categoria);
+                renderizarRecursos(filtrados);
+            }
+        }
+
+        window.iniciarCompra = function(titulo, precio) {
+            const mensaje = encodeURIComponent(`Hola, me interesa comprar el recurso "${titulo}" por ${precio}. ¿Cómo procedemos con el pago y la entrega?`);
+            window.open(`https://wa.me/?text=${mensaje}`, '_blank');
+        }
+
+        window.abrirModal = function() {
+            document.getElementById('custom-modal').classList.add('active');
+        }
+
+        window.cerrarModal = function() {
+            document.getElementById('custom-modal').classList.remove('active');
+        }
+
+        document.getElementById('modal-buy-btn').addEventListener('click', () => {
+            if (pendingBuyUrl) {
+                window.open(pendingBuyUrl, '_blank');
+                cerrarModal();
+            }
+        });
+
+        // Ejecutar carga al abrir la página
+        window.addEventListener('DOMContentLoaded', cargarRecursos);
+    </script>
+</body>
+</html>
