@@ -79,6 +79,44 @@
             color: var(--accent-color);
         }
 
+        /* Sistema de Pestañas Superiores */
+        .admin-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 20px 0;
+            background-color: #0b0b0b;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tab-btn {
+            background-color: var(--card-bg);
+            color: var(--muted-color);
+            border: 1px solid var(--border-color);
+            padding: 12px 25px;
+            border-radius: 6px 6px 0 0;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            border-color: var(--brand-red);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         /* Contenedores Principales */
         .admin-container {
             max-width: 800px;
@@ -165,7 +203,7 @@
             background-color: #e01b1b;
         }
 
-        /* Listado de Recursos Existentes */
+        /* Listado de Elementos Existentes */
         .resources-list {
             margin-top: 30px;
             display: flex;
@@ -367,78 +405,189 @@
         <a href="index.html" class="back-site"><i class="fa-solid fa-arrow-left"></i> Ver Sitio Web</a>
     </header>
 
-    <!-- Formulario de Subida / Edición -->
-    <div class="admin-container">
-        <h1 class="admin-title" id="form-title">Subir Recurso</h1>
-        <p class="admin-subtitle" id="form-subtitle">Sube pistas, secuencias o multitracks, su muestra corta y su archivo completo protegido.</p>
-        
-        <form id="upload-form">
-            <input type="hidden" id="edit-id" value="">
-            
-            <div class="form-group">
-                <label for="titulo">Título del Recurso / Canción</label>
-                <input type="text" id="titulo" class="form-control" placeholder="Ej. En Su Presencia (Multitrack)" required>
-            </div>
-
-            <div class="form-group">
-                <label for="categoria">Categoría</label>
-                <select id="categoria" class="form-control" required>
-                    <option value="Multitrack">Multitrack</option>
-                    <option value="Secuencia">Secuencia</option>
-                    <option value="Pista / Instrumental">Pista / Instrumental</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="precio">Precio ($ USD)</label>
-                <input type="number" step="0.01" id="precio" class="form-control" placeholder="Ej. 5.00" value="5.00" required>
-            </div>
-
-            <div class="form-group">
-                <label for="descripcion">Descripción Breve</label>
-                <textarea id="descripcion" class="form-control" placeholder="Detalles de lo que incluye el pack..." required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="portada">Imagen de Portada (JPG, PNG)</label>
-                <input type="file" id="portada" class="form-control" accept="image/*" style="padding: 10px;">
-                <small style="color: var(--muted-color); font-size: 0.75rem;" id="portada-help">Obligatorio al crear. Opcional al editar.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="audio-muestra">Audio de Muestra (Versión corta / Preview MP3)</label>
-                <input type="file" id="audio-muestra" class="form-control" accept="audio/mp3,audio/*" style="padding: 10px;">
-                <small style="color: var(--muted-color); font-size: 0.75rem;">Este es el fragmento corto que sonará en la web de recursos.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="archivo-completo">Archivo Completo (ZIP / Multitracks / Pista Completa)</label>
-                <input type="file" id="archivo-completo" class="form-control" style="padding: 10px;">
-                <small style="color: var(--muted-color); font-size: 0.75rem;">Este es el archivo de valor que se entrega tras confirmar el pago.</small>
-            </div>
-
-            <div style="display: flex; gap: 10px;">
-                <button type="submit" class="btn-upload" id="submit-btn" style="flex: 2;">
-                    <i class="fa-solid fa-cloud-arrow-up"></i> Subir Recurso
-                </button>
-                <button type="button" id="cancel-edit-btn" class="btn-upload" style="flex: 1; background-color: #262626; display: none;">
-                    Cancelar
-                </button>
-            </div>
-        </form>
+    <!-- Pestañas de Navegación del Admin -->
+    <div class="admin-tabs">
+        <button class="tab-btn active" onclick="cambiarTab('recursos', this)">Recursos y Pistas</button>
+        <button class="tab-btn" onclick="cambiarTab('eventos', this)">Eventos</button>
+        <button class="tab-btn" onclick="cambiarTab('merch', this)">Tienda / Merch</button>
     </div>
 
-    <!-- Contenedor para ver y administrar pistas anteriores -->
-    <div class="admin-container">
-        <h2 class="admin-title" style="font-size: 1.5rem;">Pistas y Recursos Subidos</h2>
-        <p class="admin-subtitle">Administra, edita o elimina el contenido existente.</p>
-        
-        <div class="resources-list" id="admin-resources-list">
-            <div style="text-align: center; color: var(--muted-color); padding: 20px;">Cargando recursos...</div>
+    <!-- ========================================== -->
+    <!-- PESTAÑA 1: RECURSOS Y PISTAS               -->
+    <!-- ========================================== -->
+    <div id="tab-recursos" class="tab-content active">
+        <div class="admin-container">
+            <h1 class="admin-title" id="form-title">Subir Recurso</h1>
+            <p class="admin-subtitle" id="form-subtitle">Sube pistas, secuencias o multitracks, su muestra corta y su archivo completo protegido[cite: 11].</p>
+            
+            <form id="upload-form">
+                <input type="hidden" id="edit-id" value="">
+                
+                <div class="form-group">
+                    <label for="titulo">Título del Recurso / Canción</label>
+                    <input type="text" id="titulo" class="form-control" placeholder="Ej. En Su Presencia (Multitrack)" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria">Categoría</label>
+                    <select id="categoria" class="form-control" required>
+                        <option value="Multitrack">Multitrack</option>
+                        <option value="Secuencia">Secuencia</option>
+                        <option value="Pista / Instrumental">Pista / Instrumental</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="precio">Precio ($ USD)</label>
+                    <input type="number" step="0.01" id="precio" class="form-control" placeholder="Ej. 5.00" value="5.00" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción Breve</label>
+                    <textarea id="descripcion" class="form-control" placeholder="Detalles de lo que incluye el pack..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="portada">Imagen de Portada (JPG, PNG)</label>
+                    <input type="file" id="portada" class="form-control" accept="image/*" style="padding: 10px;">
+                    <small style="color: var(--muted-color); font-size: 0.75rem;" id="portada-help">Obligatorio al crear. Opcional al editar[cite: 11].</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="audio-muestra">Audio de Muestra (Versión corta / Preview MP3)</label>
+                    <input type="file" id="audio-muestra" class="form-control" accept="audio/mp3,audio/*" style="padding: 10px;">
+                    <small style="color: var(--muted-color); font-size: 0.75rem;">Este es el fragmento corto que sonará en la web de recursos[cite: 11].</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="archivo-completo">Archivo Completo (ZIP / Multitracks / Pista Completa)</label>
+                    <input type="file" id="archivo-completo" class="form-control" style="padding: 10px;">
+                    <small style="color: var(--muted-color); font-size: 0.75rem;">Este es el archivo de valor que se entrega tras confirmar el pago[cite: 11].</small>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn-upload" id="submit-btn" style="flex: 2;">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Subir Recurso
+                    </button>
+                    <button type="button" id="cancel-edit-btn" class="btn-upload" style="flex: 1; background-color: #262626; display: none;">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="admin-container">
+            <h2 class="admin-title" style="font-size: 1.5rem;">Pistas y Recursos Subidos</h2>
+            <p class="admin-subtitle">Administra, edita o elimina el contenido existente.</p>
+            <div class="resources-list" id="admin-resources-list">
+                <div style="text-align: center; color: var(--muted-color); padding: 20px;">Cargando recursos...</div>
+            </div>
         </div>
     </div>
 
-    <!-- Modal Personalizado (Confirmaciones y Avisos) -->
+    <!-- ========================================== -->
+    <!-- PESTAÑA 2: EVENTOS                         -->
+    <!-- ========================================== -->
+    <div id="tab-eventos" class="tab-content">
+        <div class="admin-container">
+            <h1 class="admin-title" id="event-form-title">Agregar Evento</h1>
+            <p class="admin-subtitle" id="event-form-subtitle">Programa las fechas de tus próximas ministraciones o conciertos.</p>
+            
+            <form id="event-upload-form">
+                <input type="hidden" id="event-edit-id" value="">
+                
+                <div class="form-group">
+                    <label for="event-titulo">Título del Evento / Iglesia</label>
+                    <input type="text" id="event-titulo" class="form-control" placeholder="Ej. Concierto de Adoración" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="event-lugar">Lugar / Ciudad</label>
+                    <input type="text" id="event-lugar" class="form-control" placeholder="Ej. Iglesia Central, Guatemala" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="event-fecha">Fecha del Evento</label>
+                    <input type="date" id="event-fecha" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="event-link">Enlace de Información o Boletos (Opcional)</label>
+                    <input type="url" id="event-link" class="form-control" placeholder="Ej. https://wa.me/...">
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn-upload" id="event-submit-btn" style="flex: 2;">
+                        <i class="fa-solid fa-calendar-plus"></i> Guardar Evento
+                    </button>
+                    <button type="button" id="event-cancel-edit-btn" class="btn-upload" style="flex: 1; background-color: #262626; display: none;">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="admin-container">
+            <h2 class="admin-title" style="font-size: 1.5rem;">Eventos Programados</h2>
+            <p class="admin-subtitle">Administra los próximos eventos que se muestran en `eventos.html`.</p>
+            <div class="resources-list" id="admin-events-list">
+                <div style="text-align: center; color: var(--muted-color); padding: 20px;">Cargando eventos...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PESTAÑA 3: TIENDA / MERCH                  -->
+    <!-- ========================================== -->
+    <div id="tab-merch" class="tab-content">
+        <div class="admin-container">
+            <h1 class="admin-title" id="merch-form-title">Subir Merch / Producto</h1>
+            <p class="admin-subtitle" id="merch-form-subtitle">Agrega camisas, gorras, discos físicos u otra mercancía para `tienda.html`.</p>
+            
+            <form id="merch-upload-form">
+                <input type="hidden" id="merch-edit-id" value="">
+                
+                <div class="form-group">
+                    <label for="merch-titulo">Nombre del Producto</label>
+                    <input type="text" id="merch-titulo" class="form-control" placeholder="Ej. Camisa Oficial Marvin Cua" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="merch-precio">Precio ($ USD)</label>
+                    <input type="number" step="0.01" id="merch-precio" class="form-control" placeholder="Ej. 15.00" value="15.00" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="merch-descripcion">Descripción / Tallas disponibles</label>
+                    <textarea id="merch-descripcion" class="form-control" placeholder="Tallas S, M, L, XL..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="merch-portada">Fotografía del Producto (JPG, PNG)</label>
+                    <input type="file" id="merch-portada" class="form-control" accept="image/*" style="padding: 10px;">
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn-upload" id="merch-submit-btn" style="flex: 2;">
+                        <i class="fa-solid fa-shirt"></i> Subir Producto
+                    </button>
+                    <button type="button" id="merch-cancel-edit-btn" class="btn-upload" style="flex: 1; background-color: #262626; display: none;">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="admin-container">
+            <h2 class="admin-title" style="font-size: 1.5rem;">Productos de Merch Subidos</h2>
+            <p class="admin-subtitle">Administra la mercancía visible en `tienda.html`.</p>
+            <div class="resources-list" id="admin-merch-list">
+                <div style="text-align: center; color: var(--muted-color); padding: 20px;">Cargando mercancía...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Personalizado Global -->
     <div class="custom-modal-overlay" id="custom-modal">
         <div class="custom-modal">
             <i class="fa-solid fa-circle-exclamation" id="modal-icon"></i>
@@ -455,7 +604,7 @@
         &copy; 2026 Marvin Cua Ministerios. Panel de Administración.
     </footer>
 
-    <!-- Firebase SDK y lógica de gestión -->
+    <!-- Firebase SDK y lógica de gestión unificada -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -474,11 +623,13 @@
         const db = getFirestore(app);
         const storage = getStorage(app);
 
-        const uploadForm = document.getElementById('upload-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const cancelEditBtn = document.getElementById('cancel-edit-btn');
-        const editIdInput = document.getElementById('edit-id');
-        const listContainer = document.getElementById('admin-resources-list');
+        // Control de Pestañas
+        window.cambiarTab = function(tabName, btnElement) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+            btnElement.classList.add('active');
+        };
 
         // Sistema de Modales Global
         window.mostrarModal = function(titulo, mensaje, tipo = 'info', onConfirm = null) {
@@ -511,7 +662,21 @@
             document.getElementById('custom-modal').classList.remove('active');
         };
 
-        // Cargar listado en el Admin
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+        }
+
+        // ==========================================
+        // 1. GESTIÓN DE RECURSOS
+        // ==========================================
+        const uploadForm = document.getElementById('upload-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const cancelEditBtn = document.getElementById('cancel-edit-btn');
+        const editIdInput = document.getElementById('edit-id');
+        const listContainer = document.getElementById('admin-resources-list');
+        let cachedDataToEdit = {};
+
         async function cargarListaAdmin() {
             try {
                 const q = query(collection(db, "recursos"), orderBy("createdAt", "desc"));
@@ -538,10 +703,10 @@
                                 </div>
                             </div>
                             <div class="resource-actions">
-                                <button class="btn-action-edit" onclick="prepararEdicion('${id}', '${escapeHtml(data.titulo)}', '${data.categoria}', '${data.precio}', '${escapeHtml(data.descripcion)}', '${data.portadaUrl}', '${data.muestraUrl || ''}', '${data.archivoUrl || ''}')">
+                                <button class="btn-action-edit" onclick="prepararEdicionRecurso('${id}', '${escapeHtml(data.titulo)}', '${data.categoria}', '${data.precio}', '${escapeHtml(data.descripcion)}', '${data.portadaUrl}', '${data.muestraUrl || ''}', '${data.archivoUrl || ''}')">
                                     <i class="fa-solid fa-pen"></i> Editar
                                 </button>
-                                <button class="btn-action-delete" onclick="confirmarBorrado('${id}', '${escapeHtml(data.titulo)}')">
+                                <button class="btn-action-delete" onclick="confirmarBorradoRecurso('${id}', '${escapeHtml(data.titulo)}')">
                                     <i class="fa-solid fa-trash"></i> Borrar
                                 </button>
                             </div>
@@ -551,65 +716,43 @@
 
                 listContainer.innerHTML = html;
             } catch (error) {
-                console.error("Error cargando admin:", error);
-                listContainer.innerHTML = '<div style="color: var(--brand-red); text-align: center;">Error al cargar la lista.</div>';
+                console.error("Error cargando admin recursos:", error);
             }
         }
 
-        function escapeHtml(text) {
-            if (!text) return '';
-            return text.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
-        }
-
-        // Preparar formulario para editar
-        let cachedDataToEdit = {};
-        window.prepararEdicion = function(id, titulo, categoria, precio, descripcion, portadaUrl, muestraUrl, archivoUrl) {
+        window.prepararEdicionRecurso = function(id, titulo, categoria, precio, descripcion, portadaUrl, muestraUrl, archivoUrl) {
             editIdInput.value = id;
             document.getElementById('titulo').value = titulo;
             document.getElementById('categoria').value = categoria;
             document.getElementById('precio').value = precio || '5.00';
             document.getElementById('descripcion').value = descripcion;
-
             cachedDataToEdit = { portadaUrl, muestraUrl, archivoUrl };
 
             document.getElementById('form-title').textContent = 'Editar Recurso';
-            document.getElementById('form-subtitle').textContent = `Modificando: ${titulo}`;
             submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios';
             cancelEditBtn.style.display = 'block';
-
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
-        window.cancelarEdicion = function() {
+        cancelEditBtn.addEventListener('click', () => {
             editIdInput.value = '';
             uploadForm.reset();
             cachedDataToEdit = {};
             document.getElementById('form-title').textContent = 'Subir Recurso';
-            document.getElementById('form-subtitle').textContent = 'Sube pistas, secuencias o multitracks, su muestra corta y su archivo completo protegido.';
             submitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Subir Recurso';
             cancelEditBtn.style.display = 'none';
-        };
+        });
 
-        cancelEditBtn.addEventListener('click', cancelarEdicion);
-
-        // Confirmar borrado con modal
-        window.confirmarBorrado = function(id, titulo) {
-            window.mostrarModal('¿Eliminar recurso?', `Estás a punto de borrar "${titulo}". Esta acción no se puede deshacer.`, 'confirm', async () => {
-                try {
-                    await deleteDoc(doc(db, "recursos", id));
-                    window.mostrarModal('¡Eliminado!', 'El recurso ha sido borrado con éxito.');
-                    cargarListaAdmin();
-                } catch (error) {
-                    console.error("Error al borrar:", error);
-                    window.mostrarModal('Error', 'No se pudo eliminar el recurso.');
-                }
+        window.confirmarBorradoRecurso = function(id, titulo) {
+            window.mostrarModal('¿Eliminar recurso?', `Estás a punto de borrar "${titulo}".`, 'confirm', async () => {
+                await deleteDoc(doc(db, "recursos", id));
+                window.mostrarModal('¡Eliminado!', 'El recurso ha sido borrado con éxito.');
+                cargarListaAdmin();
             });
         };
 
-        // Enviar formulario (Crear o Actualizar)
         uploadForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-
             const idEdicion = editIdInput.value;
             const titulo = document.getElementById('titulo').value;
             const categoria = document.getElementById('categoria').value;
@@ -633,55 +776,280 @@
                 let archivoUrl = cachedDataToEdit.archivoUrl || '';
 
                 if (portadaInput) {
-                    const portadaRef = ref(storage, `portadas/${Date.now()}_${portadaInput.name}`);
-                    const snapP = await uploadBytes(portadaRef, portadaInput);
+                    const snapP = await uploadBytes(ref(storage, `portadas/${Date.now()}_${portadaInput.name}`), portadaInput);
                     portadaUrl = await getDownloadURL(snapP.ref);
                 }
-
                 if (muestraInput) {
-                    const muestraRef = ref(storage, `muestras/${Date.now()}_${muestraInput.name}`);
-                    const snapM = await uploadBytes(muestraRef, muestraInput);
+                    const snapM = await uploadBytes(ref(storage, `muestras/${Date.now()}_${muestraInput.name}`), muestraInput);
                     muestraUrl = await getDownloadURL(snapM.ref);
                 }
-
                 if (archivoCompletoInput) {
-                    const archivoRef = ref(storage, `recursos_completos/${Date.now()}_${archivoCompletoInput.name}`);
-                    const snapA = await uploadBytes(archivoRef, archivoCompletoInput);
+                    const snapA = await uploadBytes(ref(storage, `recursos_completos/${Date.now()}_${archivoCompletoInput.name}`), archivoCompletoInput);
                     archivoUrl = await getDownloadURL(snapA.ref);
                 }
 
                 if (idEdicion) {
-                    // Actualizar
-                    await updateDoc(doc(db, "recursos", idEdicion), {
-                        titulo, categoria, precio, descripcion, portadaUrl, muestraUrl, archivoUrl
-                    });
+                    await updateDoc(doc(db, "recursos", idEdicion), { titulo, categoria, precio, descripcion, portadaUrl, muestraUrl, archivoUrl });
                     window.mostrarModal('¡Actualizado!', 'Los cambios se han guardado correctamente.');
-                    cancelarEdicion();
+                    cancelEditBtn.click();
                 } else {
-                    // Crear nuevo
-                    await addDoc(collection(db, "recursos"), {
-                        titulo, categoria, precio, descripcion, portadaUrl, muestraUrl, archivoUrl,
-                        createdAt: serverTimestamp()
-                    });
-                    window.mostrarModal('¡Éxito!', 'El recurso completo y su muestra han sido subidos con éxito.');
+                    await addDoc(collection(db, "recursos"), { titulo, categoria, precio, descripcion, portadaUrl, muestraUrl, archivoUrl, createdAt: serverTimestamp() });
+                    window.mostrarModal('¡Éxito!', 'El recurso ha sido subido con éxito.');
                     uploadForm.reset();
                 }
-
                 cargarListaAdmin();
             } catch (error) {
-                console.error("Error en operación:", error);
+                console.error(error);
                 window.mostrarModal('Error', 'Hubo un error al procesar la solicitud.');
             } finally {
                 submitBtn.disabled = false;
-                if (idEdicion) {
-                    submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios';
-                } else {
-                    submitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Subir Recurso';
-                }
+                submitBtn.innerHTML = idEdicion ? '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios' : '<i class="fa-solid fa-cloud-arrow-up"></i> Subir Recurso';
             }
         });
 
-        window.addEventListener('DOMContentLoaded', cargarListaAdmin);
+
+        // ==========================================
+        // 2. GESTIÓN DE EVENTOS
+        // ==========================================
+        const eventForm = document.getElementById('event-upload-form');
+        const eventSubmitBtn = document.getElementById('event-submit-btn');
+        const eventCancelBtn = document.getElementById('event-cancel-edit-btn');
+        const eventEditIdInput = document.getElementById('event-edit-id');
+        const eventsListContainer = document.getElementById('admin-events-list');
+
+        async function cargarEventosAdmin() {
+            try {
+                const q = query(collection(db, "eventos"), orderBy("fecha", "asc"));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    eventsListContainer.innerHTML = '<div style="text-align: center; color: var(--muted-color); padding: 20px;">No hay eventos programados.</div>';
+                    return;
+                }
+
+                let html = '';
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const id = docSnap.id;
+                    html += `
+                        <div class="resource-item-admin">
+                            <div class="resource-info-flex">
+                                <div class="resource-details">
+                                    <h4>${data.titulo}</h4>
+                                    <span>📅 ${data.fecha} • 📍 ${data.lugar}</span>
+                                </div>
+                            </div>
+                            <div class="resource-actions">
+                                <button class="btn-action-edit" onclick="prepararEdicionEvento('${id}', '${escapeHtml(data.titulo)}', '${escapeHtml(data.lugar)}', '${data.fecha}', '${data.link || ''}')">
+                                    <i class="fa-solid fa-pen"></i> Editar
+                                </button>
+                                <button class="btn-action-delete" onclick="confirmarBorradoEvento('${id}', '${escapeHtml(data.titulo)}')">
+                                    <i class="fa-solid fa-trash"></i> Borrar
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                eventsListContainer.innerHTML = html;
+            } catch (error) {
+                console.error("Error cargando eventos:", error);
+            }
+        }
+
+        window.prepararEdicionEvento = function(id, titulo, lugar, fecha, link) {
+            eventEditIdInput.value = id;
+            document.getElementById('event-titulo').value = titulo;
+            document.getElementById('event-lugar').value = lugar;
+            document.getElementById('event-fecha').value = fecha;
+            document.getElementById('event-link').value = link;
+
+            document.getElementById('event-form-title').textContent = 'Editar Evento';
+            eventSubmitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios';
+            eventCancelBtn.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        eventCancelBtn.addEventListener('click', () => {
+            eventEditIdInput.value = '';
+            eventForm.reset();
+            document.getElementById('event-form-title').textContent = 'Agregar Evento';
+            eventSubmitBtn.innerHTML = '<i class="fa-solid fa-calendar-plus"></i> Guardar Evento';
+            eventCancelBtn.style.display = 'none';
+        });
+
+        window.confirmarBorradoEvento = function(id, titulo) {
+            window.mostrarModal('¿Eliminar evento?', `¿Estás seguro de borrar "${titulo}"?`, 'confirm', async () => {
+                await deleteDoc(doc(db, "eventos", id));
+                window.mostrarModal('¡Eliminado!', 'El evento ha sido borrado.');
+                cargarEventosAdmin();
+            });
+        };
+
+        eventForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const idEdicion = eventEditIdInput.value;
+            const titulo = document.getElementById('event-titulo').value;
+            const lugar = document.getElementById('event-lugar').value;
+            const fecha = document.getElementById('event-fecha').value;
+            const link = document.getElementById('event-link').value;
+
+            eventSubmitBtn.disabled = true;
+            eventSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
+
+            try {
+                if (idEdicion) {
+                    await updateDoc(doc(db, "eventos", idEdicion), { titulo, lugar, fecha, link });
+                    window.mostrarModal('¡Actualizado!', 'Evento modificado con éxito.');
+                    eventCancelBtn.click();
+                } else {
+                    await addDoc(collection(db, "eventos"), { titulo, lugar, fecha, link, createdAt: serverTimestamp() });
+                    window.mostrarModal('¡Éxito!', 'Evento agregado correctamente.');
+                    eventForm.reset();
+                }
+                cargarEventosAdmin();
+            } catch (error) {
+                console.error(error);
+                window.mostrarModal('Error', 'No se pudo guardar el evento.');
+            } finally {
+                eventSubmitBtn.disabled = false;
+                eventSubmitBtn.innerHTML = idEdicion ? '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios' : '<i class="fa-solid fa-calendar-plus"></i> Guardar Evento';
+            }
+        });
+
+
+        // ==========================================
+        // 3. GESTIÓN DE TIENDA / MERCH
+        // ==========================================
+        const merchForm = document.getElementById('merch-upload-form');
+        const merchSubmitBtn = document.getElementById('merch-submit-btn');
+        const merchCancelBtn = document.getElementById('merch-cancel-edit-btn');
+        const merchEditIdInput = document.getElementById('merch-edit-id');
+        const merchListContainer = document.getElementById('admin-merch-list');
+        let cachedMerchToEdit = {};
+
+        async function cargarMerchAdmin() {
+            try {
+                const q = query(collection(db, "merch"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    merchListContainer.innerHTML = '<div style="text-align: center; color: var(--muted-color); padding: 20px;">No hay productos de merch subidos.</div>';
+                    return;
+                }
+
+                let html = '';
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const id = docSnap.id;
+                    const precioStr = data.precio ? `$${parseFloat(data.precio).toFixed(2)}` : '$15.00';
+
+                    html += `
+                        <div class="resource-item-admin">
+                            <div class="resource-info-flex">
+                                <img src="${data.portadaUrl || ''}" class="resource-thumb" alt="Producto">
+                                <div class="resource-details">
+                                    <h4>${data.titulo}</h4>
+                                    <span>Merch • ${precioStr}</span>
+                                </div>
+                            </div>
+                            <div class="resource-actions">
+                                <button class="btn-action-edit" onclick="prepararEdicionMerch('${id}', '${escapeHtml(data.titulo)}', '${data.precio}', '${escapeHtml(data.descripcion)}', '${data.portadaUrl}')">
+                                    <i class="fa-solid fa-pen"></i> Editar
+                                </button>
+                                <button class="btn-action-delete" onclick="confirmarBorradoMerch('${id}', '${escapeHtml(data.titulo)}')">
+                                    <i class="fa-solid fa-trash"></i> Borrar
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                merchListContainer.innerHTML = html;
+            } catch (error) {
+                console.error("Error cargando merch:", error);
+            }
+        }
+
+        window.prepararEdicionMerch = function(id, titulo, precio, descripcion, portadaUrl) {
+            merchEditIdInput.value = id;
+            document.getElementById('merch-titulo').value = titulo;
+            document.getElementById('merch-precio').value = precio || '15.00';
+            document.getElementById('merch-descripcion').value = descripcion;
+            cachedMerchToEdit = { portadaUrl };
+
+            document.getElementById('merch-form-title').textContent = 'Editar Producto';
+            merchSubmitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios';
+            merchCancelBtn.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        merchCancelBtn.addEventListener('click', () => {
+            merchEditIdInput.value = '';
+            merchForm.reset();
+            cachedMerchToEdit = {};
+            document.getElementById('merch-form-title').textContent = 'Subir Merch / Producto';
+            merchSubmitBtn.innerHTML = '<i class="fa-solid fa-shirt"></i> Subir Producto';
+            merchCancelBtn.style.display = 'none';
+        });
+
+        window.confirmarBorradoMerch = function(id, titulo) {
+            window.mostrarModal('¿Eliminar producto?', `¿Estás seguro de borrar "${titulo}"?`, 'confirm', async () => {
+                await deleteDoc(doc(db, "merch", id));
+                window.mostrarModal('¡Eliminado!', 'El producto ha sido borrado.');
+                cargarMerchAdmin();
+            });
+        };
+
+        merchForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const idEdicion = merchEditIdInput.value;
+            const titulo = document.getElementById('merch-titulo').value;
+            const precio = document.getElementById('merch-precio').value;
+            const descripcion = document.getElementById('merch-descripcion').value;
+            const portadaInput = document.getElementById('merch-portada').files[0];
+
+            if (!idEdicion && !portadaInput) {
+                window.mostrarModal('Falta foto', 'Por favor selecciona la fotografía del producto.');
+                return;
+            }
+
+            merchSubmitBtn.disabled = true;
+            merchSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Subiendo...';
+
+            try {
+                let portadaUrl = cachedMerchToEdit.portadaUrl || '';
+
+                if (portadaInput) {
+                    const snapP = await uploadBytes(ref(storage, `merch/${Date.now()}_${portadaInput.name}`), portadaInput);
+                    portadaUrl = await getDownloadURL(snapP.ref);
+                }
+
+                if (idEdicion) {
+                    await updateDoc(doc(db, "merch", idEdicion), { titulo, precio, descripcion, portadaUrl });
+                    window.mostrarModal('¡Actualizado!', 'El producto fue modificado con éxito.');
+                    merchCancelBtn.click();
+                } else {
+                    await addDoc(collection(db, "merch"), { titulo, precio, descripcion, portadaUrl, createdAt: serverTimestamp() });
+                    window.mostrarModal('¡Éxito!', 'El producto ha sido subido a la tienda con éxito.');
+                    merchForm.reset();
+                }
+                cargarMerchAdmin();
+            } catch (error) {
+                console.error(error);
+                window.mostrarModal('Error', 'No se pudo guardar el producto.');
+            } finally {
+                merchSubmitBtn.disabled = false;
+                merchSubmitBtn.innerHTML = idEdicion ? '<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios' : '<i class="fa-solid fa-shirt"></i> Subir Producto';
+            }
+        });
+
+        // Cargar todo al abrir
+        window.addEventListener('DOMContentLoaded', () => {
+            cargarListaAdmin();
+            cargarEventosAdmin();
+            cargarMerchAdmin();
+        });
     </script>
 </body>
 </html>
