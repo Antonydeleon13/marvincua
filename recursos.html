@@ -825,9 +825,10 @@
             }
         }
 
-        window.iniciarCompra = function(titulo, precio) {
+       window.iniciarCompra = function(titulo, precio) {
+            const numeroWhatsApp = "50237864361";
             const mensaje = encodeURIComponent(`Hola, me interesa comprar el recurso "${titulo}" por ${precio}. ¿Cómo procedemos con el pago y la entrega?`);
-            window.open(`https://wa.me/?text=${mensaje}`, '_blank');
+            window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
         }
 
         window.abrirModal = function() {
